@@ -24,15 +24,23 @@ var Comment = Backbone.Model.extend({
   /* The argument passed to `initialize` is what the model is instantiated with:
    * in `new Comment(message)`, message will be passed to `initialize`. */
   initialize: function(message) {
+    this.set('votes', 0);
+    this.set('message', message);
+
     /* Set the initial values for `votes` to 0 and `message` to the message.
      * Remember to use setters when working with attributes! */
   },
   votes: function() {
+    return this.get("votes");
     /* Return the votes attribute on this model.
      * Remember to use a getter when working with attributes! */
   },
   upvote: function(){
+    return this.set("votes", this.get("votes")+1);
     // Set the `votes` attribute to the current vote count plus one.
+  },
+  downvote: function(){
+    return this.set("votes", this.get("votes")-1);
   }
   // Add a downvote function; don't forget the comma above.
 });
@@ -63,7 +71,7 @@ var CommentView = Backbone.View.extend({
      * - `'change:votes'` => this first argument defines what to listen for
      *   - We can listen for a change on a specific attribute using a colon.
      * - `function`       => this is the callback for this event listener */
-      this.render()
+      this.render();
     /*   - Usually, we can't rely on `this` being what we think it is in
      *      an event listener. However, Backbone allows us to specify what
      *      `this` will be in the third argument of `model.on`,

@@ -16,6 +16,8 @@
  * Let's break this function down:
  */
 var renderSomethingOnThePage = function(message) {
+
+
   /* We will use jQuery to append a message to the page,
    * but we dont want all of this HTML to be in the `el.append` function call.
    *
@@ -101,7 +103,9 @@ var Message = Backbone.Model.extend({
      * Putting it into the initialize function let's us be sure that
      * all models that are created will have event listeners on them.
      */
-    this.on(YOUR CODE HERE);
+    this.on('change:message', function(){
+      renderSomethingOnThePage(this.get('message'));
+    });
     /* It is your turn to write the event handler.
      *
      * Make an event listener that will listen for a `change` in this model's
